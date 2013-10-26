@@ -1,0 +1,23 @@
+{
+  "version": "1",
+  "name": "IAmA Reddit",
+  "type" : "privileged",
+  "launch_path": "index.html",
+  "description": "A reddit app for Firefox OS",
+  "icons": {
+    "16": "/images/logo16.png",
+    "32": "/images/logo32.png",
+    "48": "/images/logo48.png",
+    "64": "/images/splash.png",
+    "128": "/images/logo128.png"
+  },
+  "developer": {
+    "name": "Douglas Anderson",
+    "url": "https://github.com/tehtorq"
+  },
+  "installs_allowed_from": ["*"],
+  "default_locale": "en",
+  "permissions": {
+    "systemXHR":{}
+  }
+}
