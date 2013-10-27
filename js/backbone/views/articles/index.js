@@ -5,26 +5,29 @@ var ArticlesView = Backbone.View.extend({
     "click .comment_counter": 'viewComments'
   },
 
-  initialize: function(params) {
-    params = params || {};
+  initialize: function() {
     this.model = new Backbone.Model;
-    this.model.url = params.url;
     this.collection = new Backbone.Collection;
-    //this.listenTo(this.model, "change", this.render);
+    this.listenTo(this.model, 'change', this.setArticles);
+    this.listenTo(this.collection, 'reset', this.render);
+  },
+
+  setUrl: function(url) {
+    this.model.url = url;
   },
 
   fetchArticles: function() {
-    var m = new Backbone.Model;
-    m.url = "http://www.reddit.com/.json";
-    this.model.fetch({
-      success: function() {
-        this.collection.reset(this.model.get('data').children);
-        this.render();
-      }.bind(this)
-    });
+    this.collection.reset();
+    this.model.fetch();
+  },
+
+  setArticles: function() {
+    this.collection.reset(this.model.get('data').children);
   },
 
   render: function() {
+    $('#article-list').html('');
+
     _.each(this.collection.models, function(model) {
       var view = new ArticlePartialView({model: model});
       view.renderInto($('#article-list'));

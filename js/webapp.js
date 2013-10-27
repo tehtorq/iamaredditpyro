@@ -1,19 +1,38 @@
 (function () {
 
-//   document.querySelector('#btn-buttons').addEventListener ('click', function () {
-//   document.querySelector('#buttons').className = 'current';
-//   document.querySelector('[data-position="current"]').className = 'left';
-// });
-// document.querySelector('#btn-buttons-back').addEventListener ('click', function () {
-//   document.querySelector('#buttons').className = 'right';
-//   document.querySelector('[data-position="current"]').className = 'current';
-// });
+  var router = new Router();
+  Backbone.history.start();
 
+  var articlesView = new ArticlesView();
+  articlesView.setElement($('#article-scene'));
 
-  var articlesView = new ArticlesView({
-    url: "http://www.reddit.com/.json"
+  var sidebarSubredditsView = new SidebarSubredditsView({
+    url: "http://www.reddit.com/reddits.json"
   });
 
-  articlesView.fetchArticles();
+  sidebarSubredditsView.setElement($('#sidebar-subreddits-list'));
+
+  window.App = {
+
+    setSubreddit: function(subreddit) {
+      puts("set subreddit to " + subreddit);
+
+      url = "http://www.reddit.com/.json";
+
+      if (subreddit != undefined) {
+        url = "http://www.reddit.com/r/" + subreddit + ".json"
+      }
+
+      articlesView.setUrl(url);
+      articlesView.fetchArticles();
+    }
+
+  };
+
+  _.extend(App, Backbone.Events);
+
+
+  App.setSubreddit();
+  sidebarSubredditsView.fetchSubreddits();
    
 })();

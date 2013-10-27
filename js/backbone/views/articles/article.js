@@ -28,26 +28,19 @@ var ArticlePartialView = Backbone.View.extend({
   },
 
   showMenu: function() {
-    puts("click");
-    puts($('[data-position="right"]').length);
-    // var menu = $("#sample-menu");
-    // $(menu).show();
-
-    $("#comment-scene").removeClass('right')
-    $("#comment-scene").addClass('current')
-    $("#comment-scene").removeClass('current')
-    $("#comment-scene").addClass('left')
-
-    //document.querySelector('#buttons').className = 'current';
-    // document.querySelector('[data-position="right"]').className = 'current';
-    // document.querySelector('[data-position="current"]').className = 'left';
+    var menu = $("#sample-menu");
+    $(menu).show();
   },
 
   viewComments: function() {
+    $("#comment-scene").attr('class', 'current skin-dark')
+    $("#article-scene").attr('class', 'left')
+
     var commentsView = new CommentsView({
       url: "http://www.reddit.com" + this.model.get('data').permalink + ".json"
     });
 
+    commentsView.setElement($('#comment-scene'));
     commentsView.fetchComments();
   }
 

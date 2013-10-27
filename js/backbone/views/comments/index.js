@@ -1,5 +1,9 @@
 var CommentsView = Backbone.View.extend({
 
+  events: {
+    "click #btn-buttons-back": 'goBack'
+  },
+
   initialize: function(params) {
     params = params || {};
     this.url = params.url
@@ -47,6 +51,11 @@ var CommentsView = Backbone.View.extend({
         }
       }
     }.bind(this));
+  },
+
+  goBack: function() {
+    $("#comment-scene").attr('class', 'right skin-dark');
+    $("#article-scene").attr('class', 'current');
   }
 
 });
