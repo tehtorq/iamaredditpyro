@@ -5,12 +5,15 @@ var CommentsView = Backbone.View.extend({
   },
 
   initialize: function(params) {
+    this.collection = new Backbone.Collection;
     params = params || {};
     this.url = params.url
-    //this.listenTo(this.model, "change", this.render);
+    this.listenTo(this.collection, 'reset', this.render);
   },
 
   fetchComments: function() {
+    this.collection.reset();
+    
     var collection = new Backbone.Collection;
     collection.url = this.url;
     collection.fetch({
@@ -19,13 +22,14 @@ var CommentsView = Backbone.View.extend({
         var children = json[1];
         var array = [];
         this.populateReplies(children.data.children, 0, array);
-        this.collection = new Backbone.Collection(array);
-        this.render();
+        this.collection.reset(array);
       }.bind(this)
     });
   },
 
   render: function() {
+    $('#comment-list').html('');
+
     _.each(this.collection.models, function(comment) {
       var view = new CommentPartialView({model: comment});
       view.renderInto($('#comment-list'));          

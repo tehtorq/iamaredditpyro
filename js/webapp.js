@@ -1,5 +1,12 @@
 (function () {
 
+  function scroll () {
+ alert("scroll event detected! " + window.pageXOffset + " " + window.pageYOffset);
+ // note: you can use window.innerWidth and window.innerHeight to access the width and height of the viewing area
+}
+
+  window.onscroll = scroll;
+
   var router = new Router();
   Backbone.history.start();
 

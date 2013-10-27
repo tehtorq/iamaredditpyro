@@ -46,21 +46,18 @@
 
 .comment_counter {
   text-align : center;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 40px;
-  width: 40px;
+  width: 38px;
   height: 40px;
   color: silver; 
-  padding: 0px 4px 0px 2px; 
-  /*padding: 0px 4px;*/
-  /*margin-top:0px;  */
+  padding: 0px 6px 0px 6px; 
   background: url(../../images/comment.png) no-repeat;
-  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
 }
 
 .comment_desc {
-  float: left;
-  margin: 4px 0px;
+  margin: 2px 0px;
   color: grey;
   font-size: 0.8em;
 }

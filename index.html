@@ -18,6 +18,7 @@
     <script src="js/lib/underscore-min.js"></script>
     <script src="js/lib/backbone-min.js"></script>
     <script src="js/lib/moment.min.js"></script>
+    <script src="js/lib/linky.js"></script>
 
     <script src="js/extend.js"></script>
     <script src="js/backbone/router.js"></script>
@@ -42,10 +43,11 @@
         </header>
 
         <nav>
+          <h2>Subreddits</h2>
           <ul id="sidebar-subreddit-list">
             
           </ul>
-          <h2>Subtitle</h2>
+          <h2>Settings</h2>
           <ul>
             <li><a href="#content">label</a></li>
             <li><a href="#content">label</a></li>
@@ -93,22 +95,19 @@
       </form>
 
       <div id="article-template">
-        <li class="reddit_article">
-          <div class="column">
-            <div class="comment_counter">{{num_comments}}</div>
-          </div>
-          <div class="comment_description">{{title}}</div>
-          <div class="article_desc">{{tag}}</div>
-        </li>
+        <div class="column">
+          <div class="comment_counter">{{num_comments}}</div>
+        </div>
+        <div class="comment_description">{{thumbnail}} {{title}}</div>
+        <div class="article_desc">{{tag}}</div>
       </div>
 
       <div id="comment-template">
-        <li class="reddit_comment" style="margin-left:{{indent}}px;">
+        <div class="reddit_comment" style="margin-left:{{indent}}px;">
           <div class="comment_desc"><b>{{author}}</b> {{score}} points {{created}}</div>
-          <div class="comment_spacer">&nbsp;</div>
           <div>{{body}}</div>
           <!-- <div><font color='red'>#{hidingCommentsFormatted}</font></div> -->
-        </li>
+        </div>
       </div>
     </div>
 
