@@ -31,9 +31,9 @@ var CommentsView = Backbone.View.extend({
     $('#comment-list').html('');
 
     _.each(this.collection.models, function(comment) {
-      var view = new CommentPartialView({model: comment});
+      var view = new CommentPartialView({model: comment, collection: this.collection});
       view.renderInto($('#comment-list'));          
-    });
+    }.bind(this));
 
     return this;
   },

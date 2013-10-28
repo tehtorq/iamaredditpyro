@@ -1,10 +1,5 @@
 var ArticlesView = Backbone.View.extend({
 
-  events: {
-    // "click": 'showMenu',
-    "click .comment_counter": 'viewComments'
-  },
-
   initialize: function() {
     this.model = new Backbone.Model;
     this.collection = new Backbone.Collection;
