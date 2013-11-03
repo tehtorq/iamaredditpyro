@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/headers.css">
     <link rel="stylesheet" type="text/css" href="css/drawer.css">
     <link rel="stylesheet" type="text/css" href="css/action_menu.css">
+    <link rel="stylesheet" type="text/css" href="css/input_areas.css">
 
     <link rel="stylesheet" type="text/css" href="css/themes/common.css">
     <link rel="stylesheet" type="text/css" href="css/themes/dark.css">
@@ -21,7 +22,7 @@
     <script src="js/lib/linky.js"></script>
 
     <script src="js/extend.js"></script>
-    <script src="js/backbone/router.js"></script>
+    <script src="js/backbone/views/sidebar/search.js"></script>
     <script src="js/backbone/views/sidebar/subreddits/subreddit.js"></script>
     <script src="js/backbone/views/sidebar/subreddits/index.js"></script>
     <script src="js/backbone/views/comments/comment.js"></script>
@@ -49,7 +50,7 @@
           </ul>
           <h2>Settings</h2>
           <ul>
-            <li><a href="#content">label</a></li>
+            <li><a id="search" href="#">Search</a></li>
             <li><a href="#content">label</a></li>
             <li><a href="#content">label larger label than the </a></li>
             <li><a href="#content">label</a></li>
@@ -65,10 +66,16 @@
           <h1>Frontpage</h1>
         </header>
 
+        <!-- <form role="search">
+          <button type="submit">Cancel</button>
+          <p>
+            <input type="text" placeholder="Search..." required="">
+            <button type="reset">Clear</button>
+          </p>
+        </form> -->
+
         <ul id="article-list">
         </ul>
-
-        <button>Load more</button>
 
       </section>
 
@@ -76,7 +83,7 @@
 
     <section id="comment-scene" data-type="list" class="right skin-dark" data-position="right" role="region">
       <header class="fixed">
-        <a id="btn-buttons-back" href="#"><span class="icon icon-back">back</span></a>
+        <button class="button-back"><span class="icon icon-back">back</span></button>
         <h1>Comments</h1>
       </header>
 
@@ -111,6 +118,6 @@
       </div>
     </div>
 
-    <script type="text/javascript" src="js/webapp.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>

@@ -19,7 +19,7 @@ var CommentPartialView = Backbone.View.extend({
       content = content.replace(/{{author}}/g, this.model.get('data').author);
       content = content.replace(/{{score}}/g, this.model.get('data').ups - this.model.get('data').downs);
       content = content.replace(/{{created}}/g, moment.unix(this.model.get('data').created_utc).fromNow());
-      content = content.replace(/{{hiding_comments}}/g, this.model.get('hiding_comments') || '');
+      content = content.replace(/{{hiding_comments}}/g, ((this.model.get('hiding_comments') || 0) > 0) ? 'hiding ' + this.model.get('hiding_comments') + ' comments' : '');
     }
     
     this.$el.html(content);

@@ -1,24 +1,26 @@
 var SidebarSubredditPartialView = Backbone.View.extend({
   tagName: 'li',
 
-  // events: {
-  //   'click': 'show'
-  // },
+  events: {
+    'click': 'show'
+  },
 
   render: function() {
     var url = this.model.get('data').url;
     url = '#' + url.substr(1);
 
-    var content = "<a href='{{url}}'>{{display_name}}</a>";//$('#sidebar-subreddit-template').html();
+    var content = "<a href='#'>{{display_name}}</a>";//$('#sidebar-subreddit-template').html();
     content = content.replace(/{{display_name}}/g, this.model.get('data').display_name);
     content = content.replace(/{{url}}/g, url);
     
     this.$el.html(content);
     return this;
-   }
+  },
 
-  // show: function() {
-  //   puts('show');
-  // }
+  show: function(e) {
+    //e.preventDefault();
+    puts('show');
+    App.switchSubreddit(this.model.get('data').url);
+  }
 
 });

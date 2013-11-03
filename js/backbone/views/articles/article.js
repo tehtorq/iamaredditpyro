@@ -37,13 +37,13 @@ var ArticlePartialView = Backbone.View.extend({
   },
 
   viewComments: function() {
-    $("#comment-scene").attr('class', 'current skin-dark')
-    $("#article-scene").attr('class', 'left')
+    vent.trigger('scene:comment');
+    //window.location = '#comment-scene'
+    // $("#comment-scene").attr('class', 'current skin-dark');
+    // $("#article-scene").attr('class', 'left skin-dark');
 
-    var commentsView = new CommentsView({
-      url: "http://www.reddit.com" + this.model.get('data').permalink + ".json"
-    });
-
+    var commentsView = new CommentsView;
+    commentsView.setUrl("http://www.reddit.com" + this.model.get('data').permalink + ".json");
     commentsView.setElement($('#comment-scene'));
     commentsView.fetchComments();
   },

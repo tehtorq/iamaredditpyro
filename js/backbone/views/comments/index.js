@@ -1,14 +1,16 @@
 var CommentsView = Backbone.View.extend({
 
   events: {
-    "click #btn-buttons-back": 'goBack'
+    "click .button-back": 'goBack'
   },
 
-  initialize: function(params) {
+  initialize: function() {
     this.collection = new Backbone.Collection;
-    params = params || {};
-    this.url = params.url
     this.listenTo(this.collection, 'reset', this.render);
+  },
+
+  setUrl: function(url) {
+    this.url = url;
   },
 
   fetchComments: function() {
@@ -58,8 +60,10 @@ var CommentsView = Backbone.View.extend({
   },
 
   goBack: function() {
-    $("#comment-scene").attr('class', 'right skin-dark');
-    $("#article-scene").attr('class', 'current');
+    vent.trigger('scene:article');
+    //window.location = '#article-scene';
+    // $("#comment-scene").attr('class', 'right skin-dark');
+    // $("#article-scene").attr('class', 'current skin-dark');
   }
 
 });

@@ -13,3 +13,5 @@ _.extend(Backbone.View.prototype, {
 var puts = function(string) {
   return console.log(string);
 }
+
+var vent = _.extend({}, Backbone.Events);
