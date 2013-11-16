@@ -4,23 +4,23 @@
   articlesView.setElement($('#article-scene'));
 
   var sidebarSubredditsView = new SidebarSubredditsView({
-    url: "http://www.reddit.com/reddits.json"
+    url: "http://www.reddit.com/reddits.json?jsonp=?"
   });
 
   sidebarSubredditsView.setElement($('#sidebar-subreddits-list'));
 
-  var searchButton = new SearchButtonView();
-  searchButton.setElement($('#search'));
+  var articlesHeader = new ArticlesHeaderView();
+  articlesHeader.setElement($('#articles-header'));
 
   window.App = {
 
-    switchSubreddit: function(subreddit) {
-      puts("set subreddit to " + subreddit);
+    switchUrl: function(url_partial) {
+      puts("set url to " + url_partial);
 
-      var url = "http://www.reddit.com/.json";
+      var url = "http://www.reddit.com/.json?jsonp=?";
 
-      if (subreddit != undefined) {
-        url = "http://www.reddit.com/" + subreddit + ".json"
+      if (url_partial != undefined) {
+        url = "http://www.reddit.com/" + url_partial;
       }
 
       articlesView.setUrl(url);
@@ -30,7 +30,7 @@
     search: function(searchTerm) {
       puts("search for " + searchTerm);
 
-      var url = "http://www.reddit.com/search.json?q=" + searchTerm;
+      var url = "http://www.reddit.com/search.json?jsonp=?&q=" + searchTerm;
 
       articlesView.setUrl(url);
       articlesView.fetchArticles();
@@ -46,14 +46,24 @@
       //window.location = '#comment-scene';
       $("#article-scene").attr('class', 'left skin-dark');
       $("#comment-scene").attr('class', 'current skin-dark');
+    },
+
+    showLoading: function() {
+      $('#loading').attr('class', 'show');
+    },
+
+    hideLoading: function() {
+      $('#loading').attr('class', '');
     }
 
   };
   
   vent.on("scene:article", App.showArticleScene);
   vent.on("scene:comment", App.showCommentScene);
+  vent.on("loading:true", App.showLoading);
+  vent.on("loading:false", App.hideLoading);
 
-  App.switchSubreddit();
+  App.switchUrl();
   sidebarSubredditsView.fetchSubreddits();
    
 })();

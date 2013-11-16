@@ -2,7 +2,7 @@ var ArticlesView = Backbone.View.extend({
 
   initialize: function() {
     _.bindAll(this, 'scroll');
-    $('#article-list').scroll(_.throttle(this.scroll, 1000, {leading: false}));
+    $('#article-list').scroll(_.throttle(this.scroll, 500, {leading: false}));
 
     this.model = new Backbone.Model;
     this.collection = new Backbone.Collection;
@@ -19,10 +19,13 @@ var ArticlesView = Backbone.View.extend({
   fetchArticles: function() {
     this.collection.reset();
     this.loading = true;
+    vent.trigger('loading:true');
 
     this.model.fetch({
+      // dataType: 'jsonp',
       success: function() {
         this.collection.add(this.model.get('data').children);
+        vent.trigger('loading:false');
         this.loading = false;
       }.bind(this)
     });
@@ -30,11 +33,11 @@ var ArticlesView = Backbone.View.extend({
 
   addArticle: function(article) {
     var view = new ArticlePartialView({model: article});
-    view.renderInto($('#article-list'));
+    view.renderInto(this.$('#article-list'));
   },
 
   render: function() {
-    $('#article-list').html('');
+    this.$('#article-list').html('');
     return this;
   },
 
@@ -52,11 +55,14 @@ var ArticlesView = Backbone.View.extend({
 
   loadMore: function() {
     var after = this.collection.last().get('data').name;
+    this.loading = true;
+    vent.trigger('loading:true')
 
     this.model.fetch({
       data: $.param({after: after}),
       success: function() {
         this.collection.add(this.model.get('data').children);
+        vent.trigger('loading:false')
         this.loading = false;
       }.bind(this)
     });

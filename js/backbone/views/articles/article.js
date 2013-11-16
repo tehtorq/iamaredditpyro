@@ -5,7 +5,7 @@ var ArticlePartialView = Backbone.View.extend({
   events: {
     "click": 'showMenu',
     "click .comment_counter": 'viewComments',
-    "click img": "viewImage"
+    "click img": "handleImageClick"
   },
 
   initialize: function() {
@@ -43,7 +43,7 @@ var ArticlePartialView = Backbone.View.extend({
     // $("#article-scene").attr('class', 'left skin-dark');
 
     var commentsView = new CommentsView;
-    commentsView.setUrl("http://www.reddit.com" + this.model.get('data').permalink + ".json");
+    commentsView.setUrl("http://www.reddit.com" + this.model.get('data').permalink + ".json?jsonp=?");
     commentsView.setElement($('#comment-scene'));
     commentsView.fetchComments();
   },
@@ -91,21 +91,8 @@ var ArticlePartialView = Backbone.View.extend({
     return thumbnail_url;
   },
 
-  viewImage: function() {
-    window.open(this.model.get('data').url, '_blank');
-
-    // var activity = new MozActivity({
-    //   name: "open",
-    //   data: {
-    //     type: [
-    //       "image/jpeg",
-    //       "image/png",
-    //       "image/gif",
-    //       "image/bmp"
-    //     ],
-    //     url: this.model.get('data').url
-    //   }
-    // });
+  handleImageClick: function() {
+    window.open(this.model.get('data').url);
   }
 
 });

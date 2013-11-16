@@ -14,7 +14,12 @@ var CommentPartialView = Backbone.View.extend({
 
     if (this.model.get('hidden') != true) {
       var content = $('#comment-template').html();
-      content = content.replace(/{{body}}/g, this.model.get('data').body);
+      var body = this.model.get('data').body;
+      // if (body) {
+      //   body = body.unescapeHTML();
+      // }
+
+      content = content.replace(/{{body}}/g, body);
       content = content.replace(/{{indent}}/g, 10 + this.model.get('data').indent * 4);
       content = content.replace(/{{author}}/g, this.model.get('data').author);
       content = content.replace(/{{score}}/g, this.model.get('data').ups - this.model.get('data').downs);

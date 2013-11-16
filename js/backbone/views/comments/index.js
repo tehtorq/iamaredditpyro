@@ -15,6 +15,7 @@ var CommentsView = Backbone.View.extend({
 
   fetchComments: function() {
     this.collection.reset();
+    vent.trigger('loading:true')
     
     var collection = new Backbone.Collection;
     collection.url = this.url;
@@ -23,8 +24,15 @@ var CommentsView = Backbone.View.extend({
         var json = collection.toJSON();
         var children = json[1];
         var array = [];
+
+        var firstPost = json[0].data.children[0];
+        firstPost.data.body = firstPost.data.title + "<br><br>" + firstPost.data.selftext;
+        firstPost.data.indent = 0;
+        array.push(firstPost);
+
         this.populateReplies(children.data.children, 0, array);
         this.collection.reset(array);
+        vent.trigger('loading:false')
       }.bind(this)
     });
   },

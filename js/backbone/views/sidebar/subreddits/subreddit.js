@@ -20,7 +20,7 @@ var SidebarSubredditPartialView = Backbone.View.extend({
   show: function(e) {
     //e.preventDefault();
     puts('show');
-    App.switchSubreddit(this.model.get('data').url);
+    App.switchUrl(this.model.get('data').url + '.json?jsonp=?');
   }
 
 });

@@ -108,3 +108,28 @@ section[role="region"][data-position="left"] {
 [data-type=list] li>a:active { 
   background-color: transparent;
 }
+
+/* loading bar so can tell when stuff is loading! */
+
+#loading {
+  width: 100%;
+  position: fixed;
+  z-index: 100000;
+  top: 0px;
+  left: 0px;
+  height: 40px;
+  opacity: 0;
+  display: none;
+  background: url(../images/load-fade.png) left top repeat-x;
+}
+
+@keyframes progress {
+  from { background-position: -320px top; }
+  to { background-position: 320px top; }
+}
+
+#loading.show {
+  display: block;
+  opacity: .9;
+  animation: progress 0.8s infinite linear;
+}
