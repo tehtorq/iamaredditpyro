@@ -20,9 +20,9 @@ var ArticlesHeaderView = Backbone.View.extend({
     var search_term = this.$('#search-term').val();
 
     if (search_term.indexOf('/r/') === 0) {
-      App.switchUrl(search_term + '.json');
+      App.switchUrl(search_term + '.json?jsonp=?');
     } else {
-      App.switchUrl('search.json?q=' + search_term);
+      App.switchUrl('search.json?jsonp=?&q=' + search_term);
     }
   }
 

@@ -46,6 +46,7 @@ section[role="region"] {
   right: 0;
   bottom: 0;
   transform: translateX(100%);
+  -webkit-transform: translateX(100%);
   z-index: 100;
 }
 
@@ -60,6 +61,7 @@ section[role="region"][data-position="right"] {
   right: 0;
   bottom: 0;
   transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
   z-index: 100;
 }
 
@@ -90,17 +92,42 @@ section[role="region"][data-position="left"] {
   100% { transform: translateX(100%); }
 }
 
+@-webkit-keyframes currentToLeft {
+  0%   { -webkit-transform: translateX(0); }
+  100% { -webkit-transform: translateX(-100%); }
+}
+
+@-webkit-keyframes rightToCurrent {
+  0%   { -webkit-transform: translateX(100%); }
+  100% { -webkit-transform: translateX(0); }
+}
+/*------- Go Back -------*/
+
+@-webkit-keyframes leftToCurrent {
+  0%   { -webkit-transform: translateX(-100%); }
+  100% { -webkit-transform: translateX(0); }
+}
+
+@-webkit-keyframes currentToRight {
+  0%   { -webkit-transform: translateX(0); }
+  100% { -webkit-transform: translateX(100%); }
+}
+
 [data-position="right"].current {
   animation: rightToCurrent 0.4s forwards;
+  -webkit-animation: rightToCurrent 0.4s forwards;
 }
 [data-position="left"].current {
   animation: leftToCurrent 0.4s forwards;
+  -webkit-animation: leftToCurrent 0.4s forwards;
 }
 [data-position="current"].left {
   animation: currentToLeft 0.4s forwards;
+  -webkit-animation: currentToLeft 0.4s forwards;
 }
 [data-position="current"].right {
   animation: currentToRight 0.4s forwards;
+  -webkit-animation: currentToRight 0.4s forwards;
 }
 
 /* Lists */
@@ -128,8 +155,14 @@ section[role="region"][data-position="left"] {
   to { background-position: 320px top; }
 }
 
+@-webkit-keyframes progress {
+  from { background-position: -320px top; }
+  to { background-position: 320px top; }
+}
+
 #loading.show {
   display: block;
   opacity: .9;
   animation: progress 0.8s infinite linear;
+  -webkit-animation: progress 0.8s infinite linear;
 }

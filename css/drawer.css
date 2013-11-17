@@ -12,6 +12,7 @@ section[role="region"] {
 
 section[role="region"]:target {
   transform: translateX(80%);
+  -webkit-transform: translateX(80%);
 }
 
 /* Hide anchor to change target */
